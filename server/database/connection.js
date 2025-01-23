@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
-const databaseUrl =
-  process.env.DATABASE_URL || "mongodb://localhost/argentBankDB";
 
-module.exports = async () => {
-  try {
-    await mongoose.connect(databaseUrl, { useNewUrlParser: true,useUnifiedTopology: true, });
-    console.log("Database successfully connected");
-  } catch (error) {
-    console.error(`Database Connectivity Error: ${error}`);
-    throw new Error(error);
-  }
+const dbConnection = () => {
+  mongoose
+    .connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Connecté à MongoDB Atlas");
+    })
+    .catch((err) => {
+      console.log("Erreur de connexion:", err);
+    });
 };
+
+module.exports = dbConnection; // On exporte la fonction
