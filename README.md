@@ -1,6 +1,7 @@
 # Argent Bank API
 
 This codebase contains the code needed to run the backend for Argent Bank.
+# Free Hosting can take time
 
 ## Getting Started
 
