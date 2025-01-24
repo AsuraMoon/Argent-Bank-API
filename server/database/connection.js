@@ -14,4 +14,4 @@ const dbConnection = () => {
     });
 };
 
-module.exports = dbConnection; // On exporte la fonction
+module.exports = dbConnection;
