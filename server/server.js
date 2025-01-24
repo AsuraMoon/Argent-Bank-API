@@ -1,38 +1,37 @@
-const express = require("express");
-const dotEnv = require("dotenv");
-dotEnv.config();
-const cors = require("cors");
-const swaggerUi = require("swagger-ui-express");
-const yaml = require("yamljs");
-const swaggerDocs = yaml.load("./swagger.yaml");
-const dbConnection = require("./database/connection");
+const express = require('express');
+const dotEnv = require('dotenv');
+const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const yaml = require('yamljs');
+const swaggerDocs = yaml.load('./swagger.yaml');
+const dbConnection = require('./database/connection');
 
-// Connexion à la base de données
-dbConnection();
+// Charger les variables d'environnement
+dotEnv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Handle CORS issues
-app.use(cors());
+// Connexion à la base de données
+dbConnection();
 
-// Request payload middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Handle custom routes
-app.use("/api/v1/user", require("./routes/userRoutes"));
+// Routes pour gérer les utilisateurs
+app.use('/api/v1/user', require('./routes/userRoutes'));
 
 // API Documentation
-if (process.env.NODE_ENV !== "production") {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 }
 
-app.get("/", (req, res, next) => {
-  res.send("Hello from my Express server v2!");
+app.get('/', (req, res) => {
+  res.send('Hello from my Express server v2!');
 });
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
-  console.log("DATABASE_URL:", process.env.DATABASE_URL);
+  console.log('DATABASE_URL:', process.env.DATABASE_URL);
 });
