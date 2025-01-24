@@ -1,29 +1,17 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoose = require("mongoose");
 
-// Remplace <db_password> par ton mot de passe MongoDB Atlas dans l'URI
-const uri = process.env.DATABASE_URL; // Ton URI MongoDB que tu as dans ton .env
-
-const dbConnection = async () => {
-  const client = new MongoClient(uri, {
-    serverApi: {
-      version: ServerApiVersion.v1,
-      strict: true,
-      deprecationErrors: true,
-    }
-  });
-
-  try {
-    // Connexion au serveur MongoDB
-    await client.connect();
-    // Envoi d'un ping pour vérifier la connexion
-    await client.db("admin").command({ ping: 1 });
-    console.log("Connecté à MongoDB avec succès !");
-  } catch (err) {
-    console.error("Erreur de connexion MongoDB:", err);
-  } finally {
-    // Fermeture de la connexion une fois l'opération terminée
-    await client.close();
-  }
+const dbConnection = () => {
+  mongoose
+    .connect(process.env.MONGO_URI, {  // Assure-toi que tu utilises la bonne variable d'environnement ici
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("Connecté à MongoDB Atlas");
+    })
+    .catch((err) => {
+      console.log("Erreur de connexion:", err);
+    });
 };
 
 module.exports = dbConnection;
