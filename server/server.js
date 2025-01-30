@@ -32,6 +32,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
   console.log('DATABASE_URL:', process.env.DATABASE_URL);
 });
