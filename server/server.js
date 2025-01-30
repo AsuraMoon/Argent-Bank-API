@@ -9,7 +9,10 @@ const dbConnection = require('./database/connection');
 // Charger les variables d'environnement
 dotEnv.config();
 
+
+
 const app = express();
+const dbURL = process.env.DATABASE_URL;
 const PORT = process.env.PORT || 3001;
 
 // Connexion à la base de données
@@ -32,5 +35,4 @@ app.get('/', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log('DATABASE_URL:', process.env.DATABASE_URL);
 });

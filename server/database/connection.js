@@ -7,10 +7,10 @@ const dbConnection = () => {
       useUnifiedTopology: true,
     })
     .then(() => {
-      console.log("Connecté à MongoDB Atlas");
+       ("Connecté à MongoDB Atlas");
     })
     .catch((err) => {
-      console.log("Erreur de connexion:", err);
+       ("Erreur de connexion:", err);
     });
 };
 
