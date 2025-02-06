@@ -20,6 +20,9 @@ module.exports.createUser = async (serviceData) => {
       password: hashPassword,
       firstName: serviceData.firstName,
       lastName: serviceData.lastName,
+      checking: serviceData.checking,
+      saving: serviceData.saving,
+      credit: serviceData.credit,
     });
 
     // Sauvegarde de l'utilisateur dans la base de données.
