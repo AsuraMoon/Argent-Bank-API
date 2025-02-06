@@ -3,7 +3,8 @@ const mongoose = require("mongoose"); // Importation de Mongoose pour gérer la 
 // Fonction pour établir la connexion à la base de données MongoDB.
 const dbConnection = () => {
   mongoose
-    .connect(process.env.DATABASE_URL, { // Connexion à MongoDB avec l'URL de la base de données issue des variables d'environnement.
+    .connect(process.env.DATABASE_URL, {
+      // Connexion à MongoDB avec l'URL de la base de données issue des variables d'environnement.
       useNewUrlParser: true, // Option pour utiliser l'analyseur URL de la nouvelle version de MongoDB.
       useUnifiedTopology: true, // Option pour utiliser le moteur de surveillance des connexions unifié.
     })
